@@ -23,7 +23,7 @@ export const Contact = ({
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => handleDeleteContact(contact.id, contact.status)}
+            onClick={() => handleDeleteContact(contact.id)}
           >
             Delete
           </button>
@@ -34,24 +34,17 @@ export const Contact = ({
               type="checkbox"
               role="switch"
               id="flexSwitchCheckChecked"
-              onChange={() => handleChangeContactState(contact.state)}
-              checked
+              onChange={() => handleChangeContactState(contact.id)}
+              // checked={contact.status}
             />
             <label
               className="form-check-label"
               htmlFor="flexSwitchCheckChecked"
             >
-              {contact.state}
+              {contact.isConnected ? "Connected" : "Offline"}
             </label>
           </div>
         </div>
-      </td>
-      <td>
-        {contact.isBanned ? (
-          <span className="badge bg-danger">Banned</span>
-        ) : (
-          <span className="badge bg-success">Active</span>
-        )}{" "}
       </td>
     </tr>
   );

@@ -6,24 +6,21 @@ export const ContactsList = () => {
   // const [showContact, setShowContact] = useState(false);
   const [allContacts, setAllContacts] = useState(dbContacts);
 
-  const handleDeleteContact = (contactID, contactIsBanned) => {
+  const handleDeleteContact = (contactID) => {
     setAllContacts(
       allContacts.map((contact) => {
-        contact.id === contactID && {
-          ...contact,
-          status: !contactIsBanned && true,
-        };
+        contact.id === contactID && (contact.isDeleted = true);
+        return contact;
       })
     );
-  };
+  }; //works
 
-  const handleChangeContactState = (contactState) => {
+  const handleChangeContactState = (contactID) => {
     setAllContacts(
       allContacts.map((contact) => {
-        contact.id === contactID && {
-          ...contact,
-          status: contactStatus === "Connected" ? "Offline" : "Connected",
-        };
+        contact.id === contactID &&
+          (contact.isConnected = !contact.isConnected);
+        return contact;
       })
     );
   };
@@ -37,15 +34,21 @@ export const ContactsList = () => {
         return contact;
       })
     );
-  };
+  }; //works
 
   return (
     <div className={""}>
-      <h2>Contacts</h2>
-      <button type="button" className="btn btn-primary">
+      <h2 style={{ color: "#ffd700" }}>Contacts</h2>
+      <button type="button" className="btn btn-primary mb-3">
         Add
       </button>
-      {allContacts.length ? (
+      {allContacts.every((contact) => {
+        return contact.isDeleted === true;
+      }) ? (
+        <div className={"text-center"}>
+          <h3 style={{ color: "#ff6347" }}>No contacts :(</h3>
+        </div>
+      ) : (
         <div className="table-responsive">
           <table className="table table-primary table-hover">
             <thead>
@@ -54,27 +57,24 @@ export const ContactsList = () => {
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Actions</th>
-                <th scope="col">Notes</th>
               </tr>
             </thead>
             <tbody>
               {allContacts.map((contact, index) => {
                 return (
-                  <Contact
-                    key={index}
-                    contact={contact}
-                    handleDeleteContact={handleDeleteContact}
-                    handleChangeContactState={handleChangeContactState}
-                    handleShowHideContact={handleShowHideContact}
-                  />
+                  !contact.isDeleted && (
+                    <Contact
+                      key={index}
+                      contact={contact}
+                      handleDeleteContact={handleDeleteContact}
+                      handleChangeContactState={handleChangeContactState}
+                      handleShowHideContact={handleShowHideContact}
+                    />
+                  )
                 );
               })}
             </tbody>
           </table>
-        </div>
-      ) : (
-        <div className={"text-center"}>
-          <h3>No contacts :(</h3>
         </div>
       )}
     </div>
