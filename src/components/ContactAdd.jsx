@@ -1,33 +1,46 @@
-import React from "react";
-import { contacts } from "../data/contacts";
+import React, { useState } from "react";
 
 const initialForm = {
+  id: Date.now(),
   name: "",
   lastname: "",
   email: "",
+  isConnected: true,
+  isHidden: false,
+  isDeleted: false,
 };
 
-export const ContactAdd = () => {
+export const ContactAdd = ({ allContacts, setAllContacts, setModal }) => {
   const [form, setForm] = useState(initialForm);
+  const [isSuccessful, setisSuccessful] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    contacts.push(form);
+    setAllContacts([...allContacts, form]);
+    setisSuccessful(true);
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  return (
+  const handleClose = () => {
+    setModal(false);
+  };
+
+  return isSuccessful ? (
+    <div>
+      <h2 style={{ color: "#f5fffa" }}>Successful ;)</h2>
+      <button type="button" className="btn btn-danger" onClick={handleClose}>
+        Close
+      </button>
+    </div>
+  ) : (
     <div>
       <h2>Add Contact</h2>
 
       <form>
         <div className="mb-1">
-          <label forHtml="name" className="form-label">
-            Name:
-          </label>
           <input
             type="text"
             className="form-control"
@@ -42,13 +55,10 @@ export const ContactAdd = () => {
         </div>
 
         <div className="mb-1">
-          <label for="" className="form-label">
-            Last Name:
-          </label>
           <input
             type="text"
             className="form-control"
-            name="name"
+            name="lastname"
             id="lastname"
             aria-describedby="helpId"
             placeholder="Last Name..."
@@ -59,9 +69,6 @@ export const ContactAdd = () => {
         </div>
 
         <div className="mb-1">
-          <label for="" className="form-label">
-            Email
-          </label>
           <input
             type="email"
             className="form-control"
@@ -74,10 +81,22 @@ export const ContactAdd = () => {
             required
           />
         </div>
-
-        <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
-          Add!
-        </button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
+            Add!
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={handleClose}
+          >
+            Close
+          </button>
+        </div>
       </form>
     </div>
   );

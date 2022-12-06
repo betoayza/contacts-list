@@ -12,20 +12,26 @@ export const Contact = ({
       <td>{contact.isHidden ? "-" : contact.lastname}</td>
       <td>{contact.isHidden ? "-" : contact.email}</td>
       <td>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <button
             type="button"
             className="btn btn-primary"
             onClick={() => handleShowHideContact(contact.id)}
+            style={{ height: "40px", width: "40px" }}
           >
-            {contact.isHidden ? "Show" : "Hide"}
+            {contact.isHidden ? (
+              <i className="bi-eye-fill"></i>
+            ) : (
+              <i className="bi-eye-slash-fill"></i>
+            )}
           </button>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-danger m-1"
             onClick={() => handleDeleteContact(contact.id)}
+            style={{ height: "40px", width: "40px" }}
           >
-            Delete
+            <i className="bi-trash2-fill"></i>
           </button>
 
           <div className="form-check form-switch">
@@ -35,13 +41,16 @@ export const Contact = ({
               role="switch"
               id="flexSwitchCheckChecked"
               onChange={() => handleChangeContactState(contact.id)}
-              // checked={contact.status}
             />
             <label
               className="form-check-label"
               htmlFor="flexSwitchCheckChecked"
             >
-              {contact.isConnected ? "Connected" : "Offline"}
+              {contact.isConnected ? (
+                <span className="badge text-bg-success">"Connected"</span>
+              ) : (
+                <span className="badge text-bg-secondary">"Offline"</span>
+              )}
             </label>
           </div>
         </div>

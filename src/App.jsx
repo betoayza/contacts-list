@@ -1,13 +1,16 @@
-import { useState } from "react";
 import { ContactsList } from "./components/ContactsList";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App text-center">
-      <h1 style={{ color: "#7cfc00" }}>Contacts List</h1>
-      <ContactsList />
+    <div className="App text-center h-auto container">
+      <h1 style={{ color: "#ffd700" }}>Contacts List</h1>
+      <div
+        className={"row row-cols-auto"}
+        style={{ display: "grid", placeItems: "center" }}
+      >
+        <ContactsList />
+      </div>
     </div>
   );
 }

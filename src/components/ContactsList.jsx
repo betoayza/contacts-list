@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { dbContacts } from "../data/contacts";
 import { Contact } from "./Contact";
+import { ContactAdd } from "./ContactAdd";
+import { Modal } from "./Modal";
 
 export const ContactsList = () => {
-  // const [showContact, setShowContact] = useState(false);
   const [allContacts, setAllContacts] = useState(dbContacts);
+  const [modal, setModal] = useState(false);
 
   const handleDeleteContact = (contactID) => {
     setAllContacts(
@@ -25,7 +27,9 @@ export const ContactsList = () => {
     );
   };
 
-  const addContact = () => {};
+  const handleAddContact = () => {
+    setModal(true);
+  };
 
   const handleShowHideContact = (contactID) => {
     setAllContacts(
@@ -36,11 +40,24 @@ export const ContactsList = () => {
     );
   }; //works
 
-  return (
-    <div className={""}>
-      <h2 style={{ color: "#ffd700" }}>Contacts</h2>
-      <button type="button" className="btn btn-primary mb-3">
-        Add
+  return modal ? (
+    <Modal>
+      <div>
+        <ContactAdd
+          allContacts={allContacts}
+          setAllContacts={setAllContacts}
+          setModal={setModal}
+        />
+      </div>
+    </Modal>
+  ) : (
+    <div className={""} style={{ maxWidth: "100vw" }}>
+      <button
+        type="button"
+        className="btn btn-success mb-3"
+        onClick={handleAddContact}
+      >
+        <i className="bi-plus-lg"></i>
       </button>
       {allContacts.every((contact) => {
         return contact.isDeleted === true;
@@ -49,9 +66,12 @@ export const ContactsList = () => {
           <h3 style={{ color: "#ff6347" }}>No contacts :(</h3>
         </div>
       ) : (
-        <div className="table-responsive">
-          <table className="table table-primary table-hover">
-            <thead>
+        <div className="table-responsive rounded">
+          <table
+            className="table table-hover"
+            style={{ backgroundColor: "#e0ffff" }}
+          >
+            <thead style={{ backgroundColor: "#00ced1" }}>
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Last Name</th>
