@@ -1,9 +1,9 @@
 export let dbContacts = [
   {
     id: 1,
-    name: "Alberto",
-    lastname: "Ayza",
-    email: "aaayza@gmail.com",
+    name: "Jacinto",
+    lastname: "Flores",
+    email: "asd@gmail.com",
     isConnected: true,
     isHidden: false,
     isDeleted: false,
