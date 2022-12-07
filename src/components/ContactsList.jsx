@@ -54,10 +54,14 @@ export const ContactsList = () => {
     <div className={""} style={{ maxWidth: "100vw" }}>
       <button
         type="button"
-        className="btn btn-success mb-3"
+        className="btn mb-3"
         onClick={handleAddContact}
+        style={{ backgroundColor: "#ffb347" }}
       >
-        <i className="bi-plus-lg"></i>
+        <i
+          className="bi-plus-lg"
+          style={{ color: "black", fontSize: "20px" }}
+        ></i>
       </button>
       {allContacts.every((contact) => {
         return contact.isDeleted === true;

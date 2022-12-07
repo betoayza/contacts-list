@@ -12,7 +12,13 @@ export const Contact = ({
       <td>{contact.isHidden ? "-" : contact.lastname}</td>
       <td>{contact.isHidden ? "-" : contact.email}</td>
       <td>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <button
             type="button"
             className="btn btn-primary"
@@ -47,9 +53,9 @@ export const Contact = ({
               htmlFor="flexSwitchCheckChecked"
             >
               {contact.isConnected ? (
-                <span className="badge text-bg-success">"Connected"</span>
+                <span className="badge text-bg-success">Connected</span>
               ) : (
-                <span className="badge text-bg-secondary">"Offline"</span>
+                <span className="badge text-bg-secondary">Offline</span>
               )}
             </label>
           </div>

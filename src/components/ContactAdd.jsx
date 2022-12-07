@@ -37,7 +37,7 @@ export const ContactAdd = ({ allContacts, setAllContacts, setModal }) => {
     </div>
   ) : (
     <div>
-      <h2>Add Contact</h2>
+      <h2 style={{ color: "#f5fffa" }}>Add Contact</h2>
 
       <form>
         <div className="mb-1">
