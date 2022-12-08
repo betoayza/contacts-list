@@ -47,6 +47,7 @@ export const Contact = ({
               role="switch"
               id="flexSwitchCheckChecked"
               onChange={() => handleChangeContactState(contact.id)}
+              checked={contact.isConnected ? true : false}
             />
             <label
               className="form-check-label"
